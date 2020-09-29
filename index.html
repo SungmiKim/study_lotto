@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Insert title here</title>
   </head>
   <style>
@@ -13,7 +14,6 @@
       background: url("./images/bg_img.jpg");
       background-repeat: no-repeat;
       background-size: cover;
-      position: relative;
     }
 
     table div {
@@ -73,19 +73,16 @@
       line-height: 50px;
       color: #ffffff;
     }
-    /* img {
-      width: 280%;
-      height: 280%;
-      opacity: 0.5;
-      position: absolute;
-      z-index: -1;
-      top: 100%;
-      left: 30%;
-      transform: translate(-50%, -50%);
+
+    @media (max-width: 1250px) {
+      body {
+        width: 90%;
+        height: 100%;
+        background: url("./images/bg_img.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     }
-    .wrap {
-      position: relative;
-    } */
   </style>
   <body>
     <!-- <div class="wrap"> -->
