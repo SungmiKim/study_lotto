@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <style>
+    body {
+      margin: auto;
+      padding-top: 50px;
+      width: 40%;
+      height: 100%;
+      background: url("./images/bg_img.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    table div {
+      width: 80px;
+      height: 80px;
+      text-align: center;
+      line-height: 80px;
+      border-radius: 80px;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 1px 1px 5px #000;
+    }
+
+    #num1 {
+      background-color: #ff7272;
+    }
+
+    #num2 {
+      background-color: #5bccff;
+    }
+
+    #num3 {
+      background-color: #fbc400;
+    }
+
+    #num4 {
+      background-color: #b3e134;
+    }
+
+    #num5 {
+      background-color: #faa90e;
+    }
+
+    #num6 {
+      background-color: #aaaaaa;
+    }
+
+    table {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 20px;
+    }
+    #btn {
+      background-color: #3b466b;
+      width: 130px;
+      height: 50px;
+      border-radius: 15px;
+      text-align: center;
+      cursor: pointer;
+      float: right;
+    }
+
+    #btn-text {
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 50px;
+      color: #ffffff;
+    }
+    /* img {
+      width: 280%;
+      height: 280%;
+      opacity: 0.5;
+      position: absolute;
+      z-index: -1;
+      top: 100%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+    }
+    .wrap {
+      position: relative;
+    } */
+  </style>
+  <body>
+    <!-- <div class="wrap"> -->
+    <h1>인생한방 로또뽑기</h1>
+    버튼을 클릭하면 6개의 숫자가 랜덤으로 나옵니다.<br /><br />
+    <table>
+      <tr>
+        <td style="padding-right: 15px">
+          <div id="num1">로</div>
+        </td>
+        <td style="padding-right: 15px">
+          <div id="num2">또</div>
+        </td>
+        <td style="padding-right: 15px">
+          <div id="num3">추</div>
+        </td>
+        <td style="padding-right: 15px">
+          <div id="num4">천</div>
+        </td>
+        <td style="padding-right: 15px">
+          <div id="num5">번</div>
+        </td>
+        <td style="padding-right: 15px">
+          <div id="num6">호</div>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <div id="btn" onclick="randomDice()">
+      <div id="btn-text">추천번호</div>
+    </div>
+    <!-- <img src="./images/bg_img.jpg" /> -->
+    <!-- </div> -->
+    <script type="text/javascript">
+      var time1 = 0;
+      var time2 = 0;
+      var time3 = 0;
+      var time4 = 0;
+      var time5 = 0;
+      var time6 = 0;
+
+      var numbers = [];
+      var pickNumbers = 6;
+
+      function pickNow() {
+        for (insertCur = 0; insertCur < pickNumbers; insertCur++) {
+          numbers[insertCur] = Math.floor(Math.random() * 45) + 1;
+          for (searchCur = 0; searchCur < insertCur; searchCur++) {
+            if (numbers[insertCur] == numbers[searchCur]) {
+              insertCur--;
+              break;
+            }
+          }
+        }
+      }
+      function throwDice1() {
+        count1 = count1 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count1 != 0) {
+          // 그림1
+          var diceNum1 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num1").innerText = diceNum1;
+        } else if (count1 == 0) {
+          clearInterval(time1);
+          document.getElementById("num1").innerText = numbers[0];
+        }
+      }
+      function throwDice2() {
+        count2 = count2 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count2 != 0) {
+          // 그림2
+          var diceNum2 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num2").innerText = diceNum2;
+        } else if (count2 == 0) {
+          clearInterval(time2);
+          document.getElementById("num2").innerText = numbers[1];
+        }
+      }
+
+      function throwDice3() {
+        count3 = count3 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count3 != 0) {
+          // 그림3
+          var diceNum3 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num3").innerText = diceNum3;
+        } else if (count3 == 0) {
+          clearInterval(time3);
+          document.getElementById("num3").innerText = numbers[2];
+        }
+      }
+
+      function throwDice4() {
+        count4 = count4 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count4 != 0) {
+          // 그림4
+          var diceNum4 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num4").innerText = diceNum4;
+        } else if (count4 == 0) {
+          clearInterval(time4);
+          document.getElementById("num4").innerText = numbers[3];
+        }
+      }
+
+      function throwDice5() {
+        count5 = count5 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count5 != 0) {
+          // 그림5
+          var diceNum5 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num5").innerText = diceNum5;
+        } else if (count5 == 0) {
+          clearInterval(time5);
+          document.getElementById("num5").innerText = numbers[4];
+        }
+      }
+
+      function throwDice6() {
+        count6 = count6 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count6 != 0) {
+          // 그림6
+          var diceNum6 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num6").innerText = diceNum6;
+        } else if (count6 == 0) {
+          clearInterval(time6);
+          document.getElementById("num6").innerText = numbers[5];
+        }
+      }
+
+      function randomDice() {
+        pickNow();
+
+        count1 = 10;
+        clearInterval(time1);
+        time1 = setInterval("throwDice1()", 50);
+
+        count2 = 20;
+        clearInterval(time2);
+        time2 = setInterval("throwDice2()", 50);
+
+        count3 = 30;
+        clearInterval(time3);
+        time3 = setInterval("throwDice3()", 50);
+
+        count4 = 40;
+        clearInterval(time4);
+        time4 = setInterval("throwDice4()", 50);
+
+        count5 = 50;
+        clearInterval(time5);
+        time5 = setInterval("throwDice5()", 50);
+
+        count6 = 60;
+        clearInterval(time6);
+        time6 = setInterval("throwDice6()", 50);
+      }
+    </script>
+  </body>
+</html>
