@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>행운의 번호 뽑기</title>
+    <style>
+      input[type="text"] {
+        width: 145px;
+        padding: 5px;
+
+        background-color: #e7e7e7;
+        border: 1px solid silver;
+      }
+
+      input[type="button"] {
+        width: 50px;
+        padding: 5px;
+
+        background-color: green;
+        color: white;
+        border: 1px solid silver;
+      }
+    </style>
+    <script>
+      function pickNow() {
+        // 배열 생성. new Array(갯수)는 new Array(원소, 원소,...)랑 헷갈리므로 쓰지 마세요.
+        var numbers = [];
+        // 자바스크립트에서 배열은 크기가 고정되어 있지 않습니다.
+        // 총 원소 갯수보다 큰 번호에 넣으면 그 큰 수까지 배열이 확장됩니다.
+        // 1개짜리 배열에 [6]에다 값을 넣으면 다음과 같이 됩니다.
+        // [값,undefined,undefined,undefined,undefined,값]
+        var pickNumbers = 6;
+
+        // insertCur가 배열의 최종 길이가 될 pickNumbers를 넘지 않을 때까지 반복합니다.
+        // 중복이 생긴다면 반복 횟수가 늘어날 수 있습니다.
+        for (insertCur = 0; insertCur < pickNumbers; insertCur++) {
+          // 1. 임의의 수 삽입
+          // Math.random()이 제공하는 0.0~0.999...의 수에 45를 곱해
+          // 0.0~44.xx의 수를 만들고 이를 내림 한다.
+          // 여기에 1을 더해서 1~45가 되도록 한다.
+          numbers[insertCur] = Math.floor(Math.random() * 45) + 1;
+
+          // 2. 중복 검사
+          // 배열의 기존 원소(insertCur 이전까지)를
+          // 방금 삽입한 수와 비교해 같은 수가 있다면 insertCur를 앞으로 밀어
+          // 다음 반복에서 같은 칸에 다른 수를 쓰도록 합니다.
+          for (searchCur = 0; searchCur < insertCur; searchCur++) {
+            if (numbers[insertCur] == numbers[searchCur]) {
+              insertCur--; // insertCur를 앞으로 민다
+              break; // 다음 것을 검색할 필요가 없으므로 중복검사 반복을 나갑니다.
+            }
+          }
+        }
+
+        //3. 출력하기
+        var result = ""; // 빈 문자열 선언
+        for (i = 0; i < pickNumbers; i++) {
+          if (i > 0) {
+            // 맨 처음 원소가 아니라면 앞에 ", "문자열 추가
+            // 1, 2, 3, ..., 6 꼴로 나오게 함
+            result += ", ";
+          }
+          result += numbers[i];
+        }
+        lotto.result.value = result; // Form에 적용
+      }
+    </script>
+  </head>
+  <body>
+    <form name="lotto">
+      <input type="button" value="뽑기" onClick="pickNow()" />
+      <br /><!-- 줄바꿈 -->
+      행운의 번호는 다음과 같습니다:
+      <input type="text" name="result" readonly />
+    </form>
+  </body>
+</html>

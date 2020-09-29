@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <h1>2개의 주사위</h1>
+    버튼을 클릭하면 2개의 주사위가 랜덤으로 나옵니다.<br /><br />
+    <table>
+      <tr>
+        <td style="padding-right: 15px">
+          <span id="num1">1</span>
+        </td>
+        <td style="padding-right: 15px">
+          <span id="num2">2</span>
+        </td>
+        <td style="padding-right: 15px">
+          <span id="num3">3</span>
+        </td>
+        <td style="padding-right: 15px">
+          <span id="num4">4</span>
+        </td>
+        <td style="padding-right: 15px">
+          <span id="num5">5</span>
+        </td>
+        <td style="padding-right: 15px">
+          <span id="num6">6</span>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <button type="button" onclick="randomDice()">주사위를 굴린다.</button>
+
+    <script type="text/javascript">
+      var time = 0;
+
+      function throwDice() {
+        var numbers = [];
+        var pickNumbers = 6;
+        for (insertCur = 0; insertCur < pickNumbers; insertCur++) {
+          numbers[insertCur] = Math.floor(Math.random() * 45) + 1;
+          for (searchCur = 0; searchCur < insertCur; searchCur++) {
+            if (numbers[insertCur] == numbers[searchCur]) {
+              insertCur--;
+              break;
+            }
+          }
+        }
+
+        count1 = count1 - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count1 != 0) {
+          // 그림1
+          var diceNum1 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num1").innerText = diceNum1;
+          // 그림2
+          var diceNum2 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num2").innerText = diceNum2;
+          // 그림3
+          var diceNum3 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num3").innerText = diceNum3;
+
+          // 그림4
+          var diceNum4 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num4").innerText = diceNum4;
+
+          // 그림5
+          var diceNum5 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num5").innerText = diceNum5;
+
+          // 그림6
+          var diceNum6 = Math.floor(Math.random() * 45) + 1;
+          document.getElementById("num6").innerText = diceNum6;
+        } else if (count1 == 0) {
+          clearInterval(time);
+
+          for (i = 0; i < pickNumbers; i++) {
+            document.getElementById(`num${i + 1}`).innerText = numbers[i];
+          }
+        }
+      }
+      function randomDice() {
+        count1 = 10;
+        clearInterval(time);
+        time = setInterval("throwDice()", 50);
+      }
+    </script>
+  </body>
+</html>

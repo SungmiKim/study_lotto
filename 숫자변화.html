@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Insert title here</title>
+  </head>
+  <body>
+    <h1>2개의 주사위</h1>
+    버튼을 클릭하면 2개의 주사위가 랜덤으로 나옵니다.<br /><br />
+    <table>
+      <tr>
+        <td style="padding-right: 15px">
+          <span id="num1">7</span>
+        </td>
+        <td style="padding-right: 15px">
+          <span id="num2">7</span>
+        </td>
+        <td>
+          <span id="num3">7</span>
+        </td>
+      </tr>
+    </table>
+    <br />
+    <button type="button" onclick="randomDice()">주사위를 굴린다.</button>
+
+    <script type="text/javascript">
+      var diceNum = 1;
+      var diceNum2 = 6;
+      var count = 5;
+      var time = 0;
+
+      function throwDice() {
+        count = count - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
+
+        if (count != 0) {
+          // 그림1
+          diceNum = Math.floor(Math.random() * 6) + 1;
+          document.getElementById("num1").innerText = diceNum;
+          // 그림2
+          diceNum2 = Math.floor(Math.random() * 6) + 1;
+          document.getElementById("num2").innerText = diceNum2;
+          // 그림3
+          diceNum3 = Math.floor(Math.random() * 6) + 1;
+          document.getElementById("num3").innerText = diceNum3;
+        } else if (count == 0) {
+          clearInterval(time);
+          // 난수 생성
+          var num1 = Math.floor(Math.random() * 6) + 1;
+          var num2 = Math.floor(Math.random() * 6) + 1;
+          var num3 = Math.floor(Math.random() * 6) + 1;
+
+          // 주사위1바꾸기
+          document.getElementById("num1").innerText = num1;
+
+          // 주사위2 바꾸기
+          document.getElementById("num2").innerText = num2;
+
+          // 주사위3 바꾸기
+          document.getElementById("num3").innerText = num3;
+          if (num1 === num2) {
+            num2 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("num2").innerText = num2;
+          }
+          if (num3 === num2) {
+            num3 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("num3").innerText = num3;
+            console.log("2같아");
+          }
+          if (num3 === num1) {
+            num3 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("num3").innerText = num3;
+            console.log("1같아");
+          }
+        }
+      }
+      function randomDice() {
+        count = 10;
+        clearInterval(time);
+        time = setInterval("throwDice()", 50);
+      }
+    </script>
+  </body>
+</html>
